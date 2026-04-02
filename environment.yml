@@ -1,0 +1,22 @@
+name: slc-rtc-lookup
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.12
+  - geopandas
+  - pandas>=2.0.0
+  - shapely>=2.0.0
+  - pyarrow
+  - asf_search
+  - rasterio
+  - dist_s1_enumerator>=1.0.13
+  - numpy
+  - fsspec
+  - pytest
+  - jupyter
+  - ruff
+  - tenacity
+  - requests
+  - aiohttp
+  - notebook
+  - pip
