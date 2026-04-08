@@ -37,7 +37,9 @@ def check_rtc_s1_from_input_slcs(
     df_rtc_check_deduped = check_rtc_s1_accountability(start_time=start, stop_time=stop, bbox=bounds)
 
     if df_rtc_check_deduped.empty:
-        click.echo('No SLC products found for the specified time range and geometry.')
+        click.echo(
+            f'No SLC products found for the specified time range (start: {start.strftime("%Y-%m-%d")}, stop: {stop.strftime("%Y-%m-%d")}) and bbox: {bbox if bbox else "None"}.'
+        )
         return
 
     df_missing = df_rtc_check_deduped[df_rtc_check_deduped['rtc_opera_id'].isnull()]
@@ -49,13 +51,13 @@ def check_rtc_s1_from_input_slcs(
 
     missing_burst_ids = df_missing['jpl_burst_id'].tolist()
 
-    click.echo(f'{start.strftime("%Y-%m-%d")} to {stop.strftime("%Y-%m-%d")}:')
+    click.echo(f'{start.strftime("%Y-%m-%d")} to {stop.strftime("%Y-%m-%d")}: \n \n')
 
     slc_missing_str = ', '.join(slc_ids_with_missing_rtc) if slc_ids_with_missing_rtc else 'None'
-    click.echo(f'SLC IDs with missing RTC-S1 ({len(slc_ids_with_missing_rtc)}/{total_slc_ids}): {slc_missing_str}')
+    click.echo(f'SLC IDs with missing RTC-S1 ({len(slc_ids_with_missing_rtc)}/{total_slc_ids}): {slc_missing_str} \n')
 
     burst_missing_str = ', '.join(missing_burst_ids) if missing_burst_ids else 'None'
-    click.echo(f'RTC-S1 Burst IDs with Missing RTC-S1 ({n_missing_bursts}/{total_bursts}): {burst_missing_str}')
+    click.echo(f'RTC-S1 Burst IDs with Missing RTC-S1 ({n_missing_bursts}/{total_bursts}): {burst_missing_str} \n')
 
     if output and n_missing_bursts > 0:
         df_missing.to_csv(output, index=False)
