@@ -28,7 +28,7 @@ def check_rtc_s1_from_input_slcs(
     output: str | None = None,
 ) -> None:
     if start is None:
-        start = datetime.now() - timedelta(days=12)
+        start = datetime.now() - timedelta(days=4)
     if stop is None:
         stop = datetime.now() - timedelta(days=2)
 
