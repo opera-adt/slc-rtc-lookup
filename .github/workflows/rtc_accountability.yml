@@ -9,6 +9,10 @@ on:
 jobs:
   check-accountability:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13"]
+      fail-fast: false
 
     steps:
       - name: Checkout repository
@@ -23,14 +27,11 @@ jobs:
           username: ${{ secrets.EARTHDATA_USERNAME }}
           password: ${{ secrets.EARTHDATA_PASSWORD }}
 
-      - name: Setup Mambaforge
-        uses: conda-incubator/setup-miniconda@v3
+      - uses: mamba-org/setup-micromamba@v3
         with:
-          miniforge-variant: Mambaforge
-          miniforge-version: latest
-          activate-environment: slc-rtc-lookup
-          use-mamba: true
-          environment-file: environment.yml
+            environment-name: slc-rtc-lookup
+            environment-file: environment.yml
+            create-args: python=${{ matrix.python-version }}
 
       - name: Install package
         shell: bash -el {0}
