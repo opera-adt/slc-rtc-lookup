@@ -72,6 +72,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update RTC-S1 accountability log [skip ci]"
+            git commit -m "Update RTC-S1 accountability log - daily cron"
             git push
           fi
