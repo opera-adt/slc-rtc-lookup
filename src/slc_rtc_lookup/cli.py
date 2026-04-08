@@ -28,13 +28,13 @@ def check_rtc_s1_from_input_slcs(
     output: str | None = None,
 ) -> None:
     if start is None:
-        start = datetime.now() - timedelta(days=4)
+        start = datetime.now() - timedelta(days=12)
     if stop is None:
         stop = datetime.now() - timedelta(days=2)
 
-    geometry = None if bbox is None else box(*[float(x) for x in bbox.split(',')])
+    bounds = None if bbox is None else box(*[float(x) for x in bbox.split(',')])
 
-    df_rtc_check_deduped = check_rtc_s1_accountability(start_time=start, stop_time=stop, bbox=geometry)
+    df_rtc_check_deduped = check_rtc_s1_accountability(start_time=start, stop_time=stop, bbox=bounds)
 
     if df_rtc_check_deduped.empty:
         click.echo('No SLC products found for the specified time range and geometry.')
