@@ -16,6 +16,12 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.OPERA_PST_DIST_TOKEN }}
+      
+      - uses: extractions/netrc@v3
+        with:
+          machine: urs.earthdata.nasa.gov
+          username: ${{ secrets.EARTHDATA_USERNAME }}
+          password: ${{ secrets.EARTHDATA_PASSWORD }}
 
       - name: Setup Mambaforge
         uses: conda-incubator/setup-miniconda@v3
