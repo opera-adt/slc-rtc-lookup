@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.USER_TOKEN }}
+          token: ${{ secrets.OPERA_PST_DIST_TOKEN }}
 
       - name: Setup Mambaforge
         uses: conda-incubator/setup-miniconda@v3
@@ -58,9 +58,9 @@ jobs:
         shell: bash -el {0}
         run: |
           git config user.name "opera-pst-dev"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "opera-pst-dev@jpl.nasa.gov"
 
-          git add LOG.md
+          git add -f LOG.md
 
           if git diff --staged --quiet; then
             echo "No changes to commit"
