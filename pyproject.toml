@@ -32,7 +32,11 @@ dependencies = [
     "dist-s1-enumerator>=0.1.0",
     "numpy>=1.23.0",
     "fsspec>=2023.1.0",
+    "click>=8.0.0",
 ]
+
+[project.scripts]
+check-rtc-s1-from-input-slcs = "slc_rtc_lookup.cli:check_rtc_s1_from_input_slcs"
 
 [tool.setuptools.packages.find]
 where = ["src"]

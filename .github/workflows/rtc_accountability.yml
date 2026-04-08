@@ -1,0 +1,70 @@
+name: RTC-S1 Accountability Check
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  check-accountability:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.USER_TOKEN }}
+
+      - name: Setup Mambaforge
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-variant: Mambaforge
+          miniforge-version: latest
+          activate-environment: slc-rtc-lookup
+          use-mamba: true
+          environment-file: environment.yml
+
+      - name: Install package
+        shell: bash -el {0}
+        run: |
+          pip install -e .
+
+      - name: Run accountability check and update LOG.md
+        shell: bash -el {0}
+        run: |
+          # Run check and capture output
+          check-rtc-s1-from-input-slcs | tee /tmp/new_output.txt || true
+
+          # Prepend to LOG.md
+          {
+            echo "# RTC-S1 Accountability Log"
+            echo ""
+            echo "This log tracks missing RTC-S1 products over time."
+            echo ""
+            cat /tmp/new_output.txt
+            echo ""
+            if [ -f LOG.md ]; then
+              echo "---"
+              echo ""
+              tail -n +6 LOG.md
+            fi
+          } > /tmp/LOG.md
+
+          mv /tmp/LOG.md LOG.md
+
+      - name: Commit and push changes
+        shell: bash -el {0}
+        run: |
+          git config user.name "opera-pst-dev"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add LOG.md
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update RTC-S1 accountability log [skip ci]"
+            git push
+          fi
