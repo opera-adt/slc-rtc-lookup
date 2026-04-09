@@ -46,7 +46,7 @@ jobs:
         shell: bash -el {0}
         run: |
           # Run check and capture output
-          check-rtc-s1-from-input-slcs --bbox "-118.6682,33.7037,-118.1553,34.3373" --start "2026-03-01" --stop "2026-03-15" | tee /tmp/new_output.txt || true
+          check-rtc-s1-from-input-slcs | tee /tmp/new_output.txt || true
 
           # Prepend to LOG.md
           {
