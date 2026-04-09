@@ -38,7 +38,8 @@ def check_rtc_s1_from_input_slcs(
 
     if df_rtc_check_deduped.empty:
         click.echo(
-            f'No SLC products found for the specified time range (start: {start.strftime("%Y-%m-%d")}, stop: {stop.strftime("%Y-%m-%d")}) and bbox: {bbox if bbox else "None"}.'
+            'No SLC products found for the specified time range'
+            f' (start: {start.strftime("%Y-%m-%d")}, stop: {stop.strftime("%Y-%m-%d")}) and bbox: {bbox if bbox else "None"}.'
         )
         return
 
