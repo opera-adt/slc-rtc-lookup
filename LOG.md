@@ -2,7 +2,10 @@
 
 This log tracks missing RTC-S1 products over time.
 
-No SLC products found for the specified time range (start: 2026-06-11, stop: 2026-06-13) and bbox: None.
+No SLC products found for the specified time range (start: 2026-06-12, stop: 2026-06-14) and bbox: None.
+
+---
+
 
 ---
 
