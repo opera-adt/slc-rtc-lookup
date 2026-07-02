@@ -2,7 +2,10 @@
 
 This log tracks missing RTC-S1 products over time.
 
-2026-06-27 to 2026-06-29: 
+No SLC products found for the specified time range (start: 2026-06-28, stop: 2026-06-30) and bbox: None.
+
+---
+
  
 
 SLC IDs with missing RTC-S1 (1/1): S1A_IW_SLC__1SDV_20260627T062151_20260627T062218_065151_083673_8A30 
