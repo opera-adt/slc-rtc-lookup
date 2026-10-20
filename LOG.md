@@ -2,7 +2,9 @@
 
 This log tracks missing RTC-S1 products over time.
 
-2026-10-15 to 2026-10-17: 
+
+---
+
  
 
 SLC IDs with missing RTC-S1 (0/1528): None 
